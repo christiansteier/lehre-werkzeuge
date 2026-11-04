@@ -1,25 +1,17 @@
-# Lehren und Lernen mit digitalen Werkzeugen
+# Erst das Ziel, dann das Werkzeug
 
-[English](README.md)
+[English](README.md) · **Online:** https://christiansteier.github.io/lehre-werkzeuge/
 
-Zwei kleine statische Web-Hilfen, ausgeliefert über GitHub Pages:
+Ein Leitfaden für Lehrende: „Was sollen Ihre Studierenden tun?“ Sieben Lernziele mit je vier empfohlenen Moodle- oder KI-Werkzeugen, einem Beispielauftrag und einem Tipp. Grundlage sind die revidierte Taxonomie nach Anderson & Krathwohl und TPACK. Dazu gibt es ein A3-Plakat (PDF, deutsch und englisch).
 
-- **`prompts/`**: Prompting-Tipps für Studierende. Prompt aus fünf Bausteinen bauen (Kontext, Rolle, Aufgabe, Format, Prüfauftrag), Vorlagen fürs wissenschaftliche Arbeiten und die Prüfungsvorbereitung ausfüllen und das Ergebnis kopieren. Gespeichert wird nur die Sprachwahl.
-- **`werkzeuge/`**: „Erst das Ziel, dann das Werkzeug“, ein Leitfaden für Lehrende. Er nennt zu sieben Lernzielen passende Moodle- und KI-Werkzeuge, auf Grundlage von Anderson & Krathwohl und TPACK. Dazu gibt es ein A3-Plakat (PDF, deutsch und englisch).
-
-Beide Seiten funktionieren auf Deutsch und Englisch, offline als Einzeldatei, im Dunkelmodus und mit der Tastatur.
-
-## Lokal ansehen
-
-```bash
-python3 -m http.server 8000
-# http://localhost:8000 öffnen
-```
+Deutsch und Englisch, läuft offline als Einzeldatei, mit Dunkelmodus und Tastaturbedienung.
 
 ## Quellen und Aktualisierung
 
-`werkzeuge/` ist ein Bauergebnis. Die Quelle (`werkzeuge.json`, `bauen.py`) liegt in einem eigenen, nicht öffentlichen Repository. Dort ändern, neu bauen und `werkzeuguebersicht.html` als `werkzeuge/index.html` samt beiden Plakaten hierher kopieren.
+Die Dateien hier sind ein Bauergebnis. Die Quelle (`werkzeuge.json`, `bauen.py`) liegt in einem eigenen, nicht öffentlichen Repository. Dort mit `python3 bauen.py --oeffentlich <dieser Ordner>` neu bauen, dann committen und pushen.
 
 ## Lizenz
 
-Inhalte: CC BY-NC-SA 4.0, Christian-Maximilian Steier, Hochschule Düsseldorf. Der Werkzeug-Leitfaden bearbeitet den Moodle Tool Guide (Joyce Seitzinger, Gavin Henrick; deutsche Fassung Hilgenstock, Gebauer, Hartwig; FH Düsseldorf 2013). Icons: Lucide (ISC-Lizenz).
+CC BY-NC-SA 4.0, Christian-Maximilian Steier, Hochschule Düsseldorf. Bearbeitet den Moodle Tool Guide (Joyce Seitzinger, Gavin Henrick; deutsche Fassung Hilgenstock, Gebauer, Hartwig; FH Düsseldorf 2013). Icons: Lucide (ISC-Lizenz).
+
+Für Studierende: [Prompting-Tipps](https://christiansteier.github.io/prompting-tipps/).

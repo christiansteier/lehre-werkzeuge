@@ -1,25 +1,17 @@
-# Teaching and learning with digital tools
+# Goal first, then the tool
 
-[Deutsch](README.de.md)
+[Deutsch](README.de.md) · **Live:** https://christiansteier.github.io/lehre-werkzeuge/
 
-Two small static web guides, served with GitHub Pages:
+A guide for university teachers: “What should your students do?” Seven learning goals, each with four recommended Moodle or AI tools, a sample task and a tip. Based on Anderson & Krathwohl's revised taxonomy and TPACK. Includes an A3 poster (PDF, German and English).
 
-- **`prompts/`**: Prompting tips for students. Build a prompt from five blocks (context, role, task, format, check request), fill in templates for academic writing and exam preparation, copy the result. Nothing is stored except your language choice.
-- **`werkzeuge/`**: “Goal first, then the tool”, a guide for teachers. It suggests Moodle and AI tools for seven learning goals, based on Anderson & Krathwohl and TPACK. It includes an A3 poster (PDF, German and English).
-
-Both pages work in German and English, offline as single files, in dark mode and with a keyboard.
-
-## Run locally
-
-```bash
-python3 -m http.server 8000
-# open http://localhost:8000
-```
+German and English, works offline as a single file, dark mode, keyboard operable.
 
 ## Sources and updates
 
-`werkzeuge/` is a build output. Its source (`werkzeuge.json`, `bauen.py`) lives in a separate, non-public repository. Edit it there, rebuild, and copy `werkzeuguebersicht.html` to `werkzeuge/index.html` together with both posters.
+The files here are build output. The source (`werkzeuge.json`, `bauen.py`) lives in a separate, non-public repository. Rebuild there with `python3 bauen.py --oeffentlich <this folder>`, then commit and push.
 
 ## Licence
 
-Content: CC BY-NC-SA 4.0, Christian-Maximilian Steier, Hochschule Düsseldorf. The tool guide adapts the Moodle Tool Guide (Joyce Seitzinger, Gavin Henrick; German version by Hilgenstock, Gebauer, Hartwig; FH Düsseldorf 2013). Icons: Lucide (ISC licence).
+CC BY-NC-SA 4.0, Christian-Maximilian Steier, Hochschule Düsseldorf. Adapts the Moodle Tool Guide (Joyce Seitzinger, Gavin Henrick; German version by Hilgenstock, Gebauer, Hartwig; FH Düsseldorf 2013). Icons: Lucide (ISC licence).
+
+For students: [Prompting tips](https://christiansteier.github.io/prompting-tipps/).

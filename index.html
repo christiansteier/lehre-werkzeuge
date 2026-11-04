@@ -1,63 +1,320 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lehren und Lernen mit digitalen Werkzeugen</title>
+<title>Werkzeugübersicht für Lehrende</title>
 <style>
-:root{--bg:#f5f5f7;--card:#fff;--text:#1d1d1f;--leise:#5c5c63;--akzent:#0a5fb4;--akzent-text:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--text:#f5f5f7;--leise:#a1a1a6;--akzent:#4da3ff;--akzent-text:#000}}
-@media (prefers-contrast:more){:root{--leise:var(--text)}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);line-height:1.5;font-size:1.0625rem}
-.huelle{max-width:52rem;margin:0 auto;padding:1.5rem 1rem 4rem}
-.kopf{display:flex;justify-content:flex-end}
-.sprache{display:flex;gap:.25rem}
-button{font:inherit;min-height:44px;min-width:44px;border-radius:10px;border:1px solid #d2d2d7;background:var(--card);color:var(--text);cursor:pointer}
-button[aria-pressed=true]{background:var(--akzent);color:var(--akzent-text);border-color:var(--akzent)}
-button:focus-visible,a:focus-visible{outline:3px solid var(--akzent);outline-offset:2px}
-h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.01em;margin:.5rem 0}
-.unter{color:var(--leise);margin:0 0 2rem}
-.raster{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
-a.karte{display:block;background:var(--card);border-radius:16px;padding:1.5rem;text-decoration:none;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08);min-height:44px}
-a.karte:hover{box-shadow:0 4px 14px rgba(0,0,0,.12)}
-.fuer{color:var(--akzent);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em}
-.karte h2{margin:.25rem 0 .5rem;font-size:1.3rem}
-.karte p{margin:0;color:var(--leise)}
-.los{display:inline-block;margin-top:1rem;font-weight:600;color:var(--akzent)}
-footer{color:var(--leise);font-size:.9rem;margin-top:2.5rem}
+:root {
+  --rot: #E60028; --rot-text: #C4001F; --rot-zart: #FDE8EB;
+  --text: #1d1d1f; --leise: #5f5f64; --grund: #F5F5F7; --karte: #ffffff; --linie: #e3e3e8;
+  --fokus: #0058B0; --ki: #5B3CC4; --ki-zart: #EEE9FB;
+  --schatten: 0 1px 2px rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.06);
+  --radius: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rot: #FF4D66; --rot-text: #FF8596; --rot-zart: #3A1A20;
+    --text: #f5f5f7; --leise: #a8a8ad; --grund: #000; --karte: #1c1c1e; --linie: #38383b;
+    --fokus: #64A8FF; --ki: #C3B3FF; --ki-zart: #2A2340; --schatten: none;
+  }
+}
+@media (prefers-contrast: more) { :root { --linie: currentColor; --leise: var(--text); } }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Liberation Sans", sans-serif; color: var(--text); background: var(--grund); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: var(--rot-text); }
+:focus-visible { outline: 3px solid var(--fokus); outline-offset: 3px; }
+.huelle { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+svg.ic { width: 1.25em; height: 1.25em; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.2em; }
+
+header.kopf { background: var(--karte); border-bottom: 1px solid var(--linie); }
+.kopfzeile { display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0.9rem 0; }
+.marke { display: flex; gap: 0.75rem; align-items: center; }
+.marke .punkt { width: 8px; height: 38px; border-radius: 4px; background: var(--rot); }
+.marke h1 { font-size: 1.15rem; margin: 0; }
+.marke p { margin: 0; color: var(--leise); font-size: 0.9rem; }
+.knoepfe { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+button, .knopf { font: inherit; min-height: 44px; min-width: 44px; padding: 0.45rem 0.9rem; border-radius: 999px; border: 1px solid var(--linie); background: var(--karte); color: var(--text); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; text-decoration: none; }
+button:hover, .knopf:hover { border-color: var(--leise); }
+button[aria-pressed="true"] { background: var(--text); color: var(--karte); border-color: var(--text); }
+
+nav.reiter { display: flex; gap: 0.25rem; padding: 0.25rem; background: var(--linie); border-radius: 999px; width: fit-content; margin: 1.5rem 0 0.5rem; max-width: 100%; overflow-x: auto; }
+nav.reiter button { border: 0; background: transparent; white-space: nowrap; }
+nav.reiter button[aria-selected="true"] { background: var(--karte); color: var(--text); box-shadow: var(--schatten); font-weight: 600; }
+
+h2.gross { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 1.5rem 0 0.25rem; letter-spacing: -0.02em; }
+.einleitung { color: var(--leise); margin: 0 0 1.5rem; font-size: 1.05rem; }
+
+.ziele { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.ziel { font: inherit; color: inherit; text-align: left; cursor: pointer; background: var(--karte); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--schatten); border: 1px solid var(--linie); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 0.5rem; min-height: 180px; }
+.ziel:hover { border-color: var(--rot); }
+.kreis { width: 52px; height: 52px; border-radius: 16px; background: var(--rot-zart); color: var(--rot-text); display: grid; place-items: center; }
+.kreis svg.ic { width: 28px; height: 28px; }
+.ziel strong { font-size: 1.15rem; }
+.ziel span.f { color: var(--leise); }
+.ziel .weiter { margin-top: auto; color: var(--rot-text); font-weight: 600; display: flex; align-items: center; gap: 0.3rem; }
+
+.zurueck { margin: 1rem 0 0; }
+.detailkopf { display: flex; gap: 1rem; align-items: center; margin: 1.25rem 0 1rem; }
+.detailkopf .kreis { width: 72px; height: 72px; border-radius: 22px; }
+.detailkopf .kreis svg.ic { width: 40px; height: 40px; }
+.detailkopf h2 { margin: 0; font-size: clamp(1.5rem, 4vw, 2.1rem); letter-spacing: -0.02em; }
+.detailkopf p { margin: 0.15rem 0 0; color: var(--leise); font-size: 1.05rem; }
+.paar { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.box { background: var(--karte); border-radius: var(--radius); padding: 1rem 1.2rem; border: 1px solid var(--linie); display: flex; gap: 0.8rem; align-items: flex-start; }
+.box > svg.ic { color: var(--rot-text); width: 1.5rem; height: 1.5rem; margin-top: 0.1rem; }
+.box b { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--leise); }
+h3.abschnitt { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; }
+
+.werkzeuge { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+.wz { background: var(--karte); border-radius: var(--radius); padding: 1.1rem 1.2rem; border: 1px solid var(--linie); box-shadow: var(--schatten); display: flex; flex-direction: column; gap: 0.5rem; }
+.wz .oben { display: flex; gap: 0.8rem; align-items: center; }
+.wz .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--grund); display: grid; place-items: center; flex: none; }
+.wz .icon svg.ic { width: 24px; height: 24px; }
+.wz.ki .icon { background: var(--ki-zart); color: var(--ki); }
+.wz h4 { margin: 0; font-size: 1.05rem; line-height: 1.25; }
+.wz .was { margin: 0; font-size: 1rem; }
+.wz .was b { font-weight: 600; }
+.etiketten { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; font-size: 0.85rem; color: var(--leise); }
+.pille { border-radius: 999px; padding: 0.1rem 0.6rem; background: var(--grund); white-space: nowrap; }
+.pille.ki { background: var(--ki-zart); color: var(--ki); font-weight: 600; }
+.aufwand { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+.aufwand i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--text); display: inline-block; }
+.aufwand i.an { background: var(--text); }
+.aufwand span { margin-left: 0.3rem; }
+.wz details summary { cursor: pointer; color: var(--rot-text); min-height: 44px; display: flex; align-items: center; font-weight: 600; }
+.wz dl { margin: 0; display: grid; gap: 0.5rem; }
+.wz dt { font-size: 0.8rem; color: var(--leise); text-transform: uppercase; letter-spacing: 0.05em; }
+.wz dd { margin: 0; }
+.wz .klein { font-size: 0.85rem; color: var(--leise); margin: 0.5rem 0 0; }
+.gutfuer { display: flex; gap: 0.35rem; flex-wrap: wrap; align-items: center; font-size: 0.85rem; color: var(--leise); }
+.gutfuer span.z { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--rot-zart); color: var(--rot-text); border-radius: 999px; padding: 0.15rem 0.6rem; }
+.gutfuer span.z svg.ic { width: 1rem; height: 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips span { display: inline-flex; gap: 0.4rem; align-items: center; background: var(--karte); border: 1px solid var(--linie); border-radius: 999px; padding: 0.4rem 0.85rem; }
+.chips.leise span { color: var(--leise); border-style: dashed; }
+.regeln { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 0 0 2rem; }
+h3.gruppe { margin: 2rem 0 0.75rem; font-size: 1.2rem; }
+
+.text { background: var(--karte); border-radius: var(--radius); padding: 1.25rem 1.5rem; border: 1px solid var(--linie); margin-bottom: 1rem; max-width: 860px; }
+.text h3 { margin-top: 0; }
+.rahmen { overflow-x: auto; }
+table.matrix { border-collapse: separate; border-spacing: 4px; font-size: 0.9rem; }
+table.matrix th { text-align: left; font-weight: 600; padding: 0.25rem 0.5rem; }
+table.matrix td { min-width: 3.6rem; height: 2.4rem; text-align: center; border-radius: 8px; background: var(--grund); color: var(--leise); }
+table.matrix td.voll { color: #fff; font-weight: 700; background: #333; }
+
+footer { color: var(--leise); font-size: 0.85rem; padding: 2rem 0 3rem; }
+.unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) { .ziel, button { transition: border-color .15s, background-color .15s; } }
+@media print { .knoepfe, nav.reiter, .zurueck { display: none !important; } body { background: #fff; } .wz, .ziel, .box { box-shadow: none; break-inside: avoid; } details > * { display: block !important; } }
 </style>
 </head>
 <body>
-<div class="huelle">
-  <div class="kopf"><div class="sprache" role="group" aria-label="Sprache / Language">
-    <button type="button" data-lang="de" aria-pressed="true">DE</button>
-    <button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
-  <main>
-    <h1 data-t="titel">Lehren und Lernen mit digitalen Werkzeugen</h1>
-    <p class="unter" data-t="unter">Zwei kleine Hilfen: eine für Studierende, eine für Lehrende.</p>
-    <div class="raster">
-      <a class="karte" href="prompts/">
-        <span class="fuer" data-t="f1">Für Studierende</span>
-        <h2 data-t="h1">Prompting-Tipps fürs Studium</h2>
-        <p data-t="p1">Prompt aus fünf Bausteinen bauen, Vorlagen für Hausarbeit und Prüfung ausfüllen und kopieren.</p>
-        <span class="los" data-t="los">Öffnen ›</span></a>
-      <a class="karte" href="werkzeuge/">
-        <span class="fuer" data-t="f2">Für Lehrende</span>
-        <h2 data-t="h2">Erst das Ziel, dann das Werkzeug</h2>
-        <p data-t="p2">Was sollen Ihre Studierenden tun? Sieben Ziele mit passenden Moodle- und KI-Werkzeugen, dazu ein Plakat zum Ausdrucken.</p>
-        <span class="los" data-t="los">Öffnen ›</span></a>
+<header class="kopf">
+  <div class="huelle kopfzeile">
+    <div class="marke"><span class="punkt" aria-hidden="true"></span>
+      <div><h1 id="titel"></h1><p id="untertitel"></p></div></div>
+    <div class="knoepfe">
+      <span role="group" id="sprachgruppe" style="display:flex;gap:.4rem">
+        <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+        <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+      </span>
+      <a class="knopf" id="plakat" href="plakat-de.pdf"></a>
     </div>
-  </main>
-  <footer data-t="fuss">Christian-Maximilian Steier, Hochschule Düsseldorf. Lizenz CC BY-NC-SA 4.0.</footer>
-</div>
+  </div>
+</header>
+
+<main class="huelle">
+  <nav class="reiter" role="tablist" id="reiter">
+    <button type="button" role="tab" data-view="ziel" id="tab-ziel"></button>
+    <button type="button" role="tab" data-view="werkzeuge" id="tab-werkzeuge"></button>
+    <button type="button" role="tab" data-view="hintergrund" id="tab-hintergrund"></button>
+  </nav>
+  <div id="inhalt" tabindex="-1"></div>
+</main>
+<footer><div class="huelle" id="fuss"></div></footer>
+
 <script>
-const T={de:{titel:"Lehren und Lernen mit digitalen Werkzeugen",unter:"Zwei kleine Hilfen: eine für Studierende, eine für Lehrende.",f1:"Für Studierende",h1:"Prompting-Tipps fürs Studium",p1:"Prompt aus fünf Bausteinen bauen, Vorlagen für Hausarbeit und Prüfung ausfüllen und kopieren.",f2:"Für Lehrende",h2:"Erst das Ziel, dann das Werkzeug",p2:"Was sollen Ihre Studierenden tun? Sieben Ziele mit passenden Moodle- und KI-Werkzeugen, dazu ein Plakat zum Ausdrucken.",los:"Öffnen ›",fuss:"Christian-Maximilian Steier, Hochschule Düsseldorf. Lizenz CC BY-NC-SA 4.0."},
-en:{titel:"Teaching and learning with digital tools",unter:"Two small guides: one for students, one for teachers.",f1:"For students",h1:"Prompting tips for your studies",p1:"Build a prompt from five blocks, fill in templates for papers and exams, and copy them.",f2:"For teachers",h2:"Goal first, then the tool",p2:"What should your students do? Seven goals with suitable Moodle and AI tools, plus a poster to print.",los:"Open ›",fuss:"Christian-Maximilian Steier, Hochschule Düsseldorf (University of Applied Sciences). Licence CC BY-NC-SA 4.0."}};
-function setze(l){localStorage.setItem("pt-lang",l);document.documentElement.lang=l;document.title=T[l].titel;
-document.querySelectorAll("[data-t]").forEach(e=>e.textContent=T[l][e.dataset.t]);
-document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===l));}
-document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>setze(b.dataset.lang));
-setze(localStorage.getItem("pt-lang")||((navigator.language||"de").toLowerCase().startsWith("de")?"de":"en"));
+const D = {"stand":"2026-11-04","titel":{"de":"Werkzeugübersicht für Lehrende","en":"Tool guide for teachers"},"untertitel":{"de":"Erst das Ziel, dann das Werkzeug","en":"Goal first, then the tool"},"stufen":[{"id":1,"de":"Erinnern","en":"Remember","verben_de":"nennen, benennen, aufzählen","verben_en":"name, list, recall"},{"id":2,"de":"Verstehen","en":"Understand","verben_de":"erklären, beschreiben, einordnen","verben_en":"explain, describe, classify"},{"id":3,"de":"Anwenden","en":"Apply","verben_de":"berechnen, durchführen, nutzen","verben_en":"calculate, carry out, use"},{"id":4,"de":"Analysieren","en":"Analyse","verben_de":"zerlegen, vergleichen, unterscheiden","verben_en":"break down, compare, distinguish"},{"id":5,"de":"Bewerten","en":"Evaluate","verben_de":"prüfen, beurteilen, begründen","verben_en":"check, judge, justify"},{"id":6,"de":"Erschaffen","en":"Create","verben_de":"entwerfen, entwickeln, gestalten","verben_en":"design, develop, produce"}],"wissen":[{"id":"F","de":"Faktenwissen","en":"Factual","erkl_de":"Begriffe, Einzelheiten, Kennwerte","erkl_en":"terms, details, values"},{"id":"K","de":"Konzeptuelles Wissen","en":"Conceptual","erkl_de":"Zusammenhänge, Modelle, Prinzipien","erkl_en":"relationships, models, principles"},{"id":"P","de":"Prozedurales Wissen","en":"Procedural","erkl_de":"Verfahren, Techniken, Handlungsfolgen","erkl_en":"methods, techniques, sequences"},{"id":"M","de":"Metakognitives Wissen","en":"Metacognitive","erkl_de":"Wissen über das eigene Vorgehen, Strategiewahl","erkl_en":"knowing one's own approach, choosing strategies"}],"eignung":[{"r":0,"de":"ungeeignet","en":"not suitable","zeichen":"✕"},{"r":1,"de":"manchmal geeignet","en":"sometimes suitable","zeichen":"~"},{"r":2,"de":"gut geeignet","en":"well suited","zeichen":"✓"}],"aufwand":[{"r":1,"de":"gering","en":"low"},{"r":2,"de":"mittel","en":"medium"},{"r":3,"de":"hoch","en":"high"}],"gruppen":[{"id":"material","de":"Materialien","en":"Resources"},{"id":"aktivitaet","de":"Aktivitäten","en":"Activities"},{"id":"ki","de":"KI-Werkzeuge","en":"AI tools"}],"reife":{"einsatz":{"de":"im Einsatz","en":"in use"},"pilot":{"de":"Pilot","en":"pilot"},"konzept":{"de":"Konzept","en":"concept"},"methode":{"de":"Methode","en":"method"}},"kurs210":null,"hinweise":{"lesen_de":"Wählen Sie, was Lernende tun sollen: eine Wissensart und eine Prozessstufe. Die Übersicht zeigt, welche Werkzeuge dafür taugen. Ein Werkzeug gilt für eine Zelle als so gut geeignet wie die schwächere seiner beiden Einstufungen.","lesen_en":"Choose what learners should do: a type of knowledge and a cognitive process. The guide shows which tools support it. A tool counts as suitable for a cell as far as the weaker of its two ratings allows.","tpack_de":"TPACK fragt, ob Technik (T), Lehrmethode (P) und Fachinhalt (C) zusammenpassen. Hier steht TK für Aufwand und Voraussetzungen, TPK für die Lernhandlung, die das Werkzeug ermöglicht, und TCK für ein Fachbeispiel. Ob alles zusammen passt, entscheiden Sie für Ihr Fach.","tpack_en":"TPACK asks whether technology (T), teaching method (P) and content (C) fit together. Here TK stands for effort and prerequisites, TPK for the learning action the tool enables, TCK for a subject example. Whether it all fits is your call for your subject.","urteil_de":"Die Einstufungen sind ein begründetes fachliches Urteil, keine Messung. Kein Werkzeug erzeugt von selbst eine Lernhandlung: Entscheidend ist der Arbeitsauftrag.","urteil_en":"The ratings are a reasoned professional judgement, not a measurement. No tool creates a learning action by itself: the task is what matters.","ki_de":"Nur von der Hochschule freigegebene KI-Dienste nutzen. Keine personenbezogenen Daten und keine Prüfungsleistungen in externe Dienste geben. Noten vergibt die Lehrperson, nicht die KI.","ki_en":"Only use AI services approved by the university. Do not put personal data or exam work into external services. Grades are given by the teacher, not by the AI."},"quellen":["Lorin W. Anderson und David R. Krathwohl (Hrsg.): A Taxonomy for Learning, Teaching, and Assessing. New York 2001.","Punya Mishra und Matthew J. Koehler: Technological Pedagogical Content Knowledge. Teachers College Record 108, Nr. 6 (2006): 1017–1054.","KIViAzubi (FKZ 13HAW013FQ), Phasenabschlussbericht „Vier Blicke auf einen Kurs“, Schicht A, HSD/ZWEK 2026.","Moodle Tool Guide: Idee Joyce Seitzinger, erweitert von Gavin Henrick, deutsche Übertragung Ralf Hilgenstock, Susanne Gebauer, Gerald Hartwig; Anpassung FH Düsseldorf FB 6 von Christian-Maximilian Steier (2013), CC BY-NC-SA."],"werkzeuge":[{"id":"datei","gruppe":"material","aufwand":1,"name":{"de":"Datei und Verzeichnis","en":"File and folder"},"kurz":{"de":"Dokumente bereitstellen (PDF, Folien, Skripte)","en":"Provide documents (PDF, slides, scripts)"},"tk":{"de":"Per Drag & Drop in den Kursraum ziehen.","en":"Drag and drop into the course."},"tpk":{"de":"Verteilt Inhalte in eine Richtung. Eine Lernhandlung entsteht erst durch einen Arbeitsauftrag.","en":"Distributes content one way. A learning action only arises from a task."},"tck":{"de":"Formelsammlung als PDF mit Leseauftrag: „Markieren Sie alle Zustandsgrößen.“","en":"Formula sheet as PDF with a reading task: “Mark every state variable.”"},"stufen":[{"r":2,"de":"Nachschlagen und wiederholen","en":"Look up and revise"},{"r":1,"de":"nur mit Leseauftrag","en":"only with a reading task"},{"r":0,"de":"Lernende handeln hier nicht: Aufgabe oder Test","en":"learners do not act here: assignment or quiz"},{"r":0,"de":"besser: Forum oder Aufgabe","en":"better: forum or assignment"},{"r":0,"de":"besser: Gegenseitige Beurteilung","en":"better: workshop"},{"r":0,"de":"besser: Aufgabe oder Wiki","en":"better: assignment or wiki"}],"wissen":[2,1,1,0],"icon":"folder"},{"id":"textseite","gruppe":"material","aufwand":1,"name":{"de":"Textseite und Buch","en":"Page and book"},"kurz":{"de":"Texte, Bilder und Videos direkt in Moodle; das Buch gliedert in Kapitel","en":"Text, images and video directly in Moodle; the book adds chapters"},"tk":{"de":"Im Editor schreiben; Bilder und Videos einbetten.","en":"Write in the editor; embed images and videos."},"tpk":{"de":"Strukturiert Inhalte. Mit eingebetteten H5P-Fragen wird Lesen aktiv.","en":"Structures content. Embedded H5P questions turn reading into activity."},"tck":{"de":"Buch „Ideale Gase“ mit einem Kapitel je Zustandsänderung.","en":"Book “Ideal gases” with one chapter per change of state."},"stufen":[{"r":2,"de":"Begriffe übersichtlich darstellen","en":"Present terms clearly"},{"r":2,"de":"Erklärungen Kapitel für Kapitel","en":"Explanations chapter by chapter"},{"r":0,"de":"besser: Test oder Lektion","en":"better: quiz or lesson"},{"r":0,"de":"besser: Forum oder Aufgabe","en":"better: forum or assignment"},{"r":0,"de":"besser: Gegenseitige Beurteilung","en":"better: workshop"},{"r":0,"de":"besser: Wiki oder Aufgabe","en":"better: wiki or assignment"}],"wissen":[2,2,1,0],"icon":"book-open"},{"id":"link","gruppe":"material","aufwand":1,"name":{"de":"Link, z. B. auf eine Simulation","en":"Link, e.g. to a simulation"},"kurz":{"de":"Externe Seiten, Simulationen und Werkzeuge einbinden","en":"Include external pages, simulations and tools"},"tk":{"de":"Adresse einfügen. Externe Dienste vorher auf Datenschutz prüfen.","en":"Paste the address. Check external services for data protection first."},"tpk":{"de":"Öffnet Simulationen und Rechenwerkzeuge. Ohne Auftrag bleiben sie Beiwerk; das Ergebnis über eine Aufgabe sichern.","en":"Opens simulations and calculators. Without a task they stay decoration; capture the result through an assignment."},"tck":{"de":"Gasgesetz-Simulation mit Auftrag: „Verdoppeln Sie das Volumen und notieren Sie den Druck.“","en":"Gas law simulation with a task: “Double the volume and note the pressure.”"},"stufen":[{"r":1,"de":"Nachschlagewerke verlinken","en":"Link reference works"},{"r":1,"de":"Simulation mit Beobachtungsauftrag","en":"Simulation with an observation task"},{"r":1,"de":"Ausprobieren in der Simulation","en":"Try things out in the simulation"},{"r":1,"de":"Zusammenhänge erkunden, Ergebnis per Aufgabe","en":"Explore relationships, result via assignment"},{"r":0,"de":"besser: Forum oder Gegenseitige Beurteilung","en":"better: forum or workshop"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[1,2,1,0],"icon":"link"},{"id":"video","gruppe":"material","aufwand":2,"name":{"de":"Video mit Transkript (Panopto)","en":"Video with transcript (Panopto)"},"kurz":{"de":"Erklären und vorführen, durchsuchbar über Kapitel und Untertitel","en":"Explain and demonstrate, searchable through chapters and captions"},"tk":{"de":"Aufzeichnen, automatische Untertitel prüfen, Kapitel setzen.","en":"Record, check automatic captions, set chapters."},"tpk":{"de":"Führt einen Lösungsweg vor. Fragen im Video unterbrechen das Zuschauen und verlangen eine eigene Antwort.","en":"Demonstrates a solution. Questions inside the video interrupt watching and require an answer."},"tck":{"de":"Rechenweg zum Ersten Hauptsatz mit einer Frage vor dem Ergebnis.","en":"Worked example on the first law with a question before the result."},"stufen":[{"r":2,"de":"Begriffe zeigen und wiederholen","en":"Show and repeat terms"},{"r":2,"de":"Zusammenhänge anschaulich erklären","en":"Explain relationships visually"},{"r":1,"de":"nur mit Fragen im Video","en":"only with in-video questions"},{"r":0,"de":"besser: Forum oder Aufgabe","en":"better: forum or assignment"},{"r":0,"de":"besser: Gegenseitige Beurteilung","en":"better: workshop"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[1,2,2,1],"icon":"video"},{"id":"abstimmung","gruppe":"aktivitaet","aufwand":1,"name":{"de":"Abstimmung","en":"Choice"},"kurz":{"de":"Eine Frage, mehrere Antworten, auf Wunsch anonym","en":"One question, several answers, optionally anonymous"},"tk":{"de":"Frage und Antwortmöglichkeiten anlegen, fertig.","en":"Add a question and options, done."},"tpk":{"de":"Schnelles Stimmungsbild. Als Vorhersage vor einer Rechnung weckt es Widerspruch und Neugier.","en":"Quick snapshot. As a prediction before a calculation it sparks surprise and curiosity."},"tck":{"de":"„Steigt der Reifendruck, wenn das Auto in der Sonne steht?“ – vor der Rechnung.","en":"“Does tyre pressure rise when the car stands in the sun?” – before calculating."},"stufen":[{"r":1,"de":"Wissen kurz abfragen","en":"Quick knowledge check"},{"r":1,"de":"Vorhersage abfragen, dann auflösen","en":"Ask for a prediction, then resolve"},{"r":0,"de":"besser: Test","en":"better: quiz"},{"r":0,"de":"besser: Forum","en":"better: forum"},{"r":1,"de":"Einschätzung abgeben, Begründung im Forum","en":"Give a judgement, reasons in the forum"},{"r":0,"de":"besser: Wiki oder Aufgabe","en":"better: wiki or assignment"}],"wissen":[1,1,0,1],"icon":"vote"},{"id":"aufgabe","gruppe":"aktivitaet","aufwand":2,"name":{"de":"Aufgabe","en":"Assignment"},"kurz":{"de":"Abgaben mit individueller Bewertung und Rückmeldung","en":"Submissions with individual grading and feedback"},"tk":{"de":"Schnell angelegt; Bewerten kostet Zeit. Bewertungsraster möglich.","en":"Quick to set up; grading takes time. Rubrics available."},"tpk":{"de":"Macht Ergebnis und Lösungsweg sichtbar. Die Rückmeldung kann am Weg ansetzen, nicht nur am Ergebnis.","en":"Makes both result and solution path visible. Feedback can address the path, not just the answer."},"tck":{"de":"„Gesucht: Ihr Lösungsweg!“ – Skizze und Rechnung als Foto hochladen.","en":"“Wanted: your solution path!” – upload sketch and calculation as a photo."},"stufen":[{"r":0,"de":"zu aufwendig: Test","en":"too much effort: quiz"},{"r":1,"de":"Erklärung in eigenen Worten","en":"Explanation in own words"},{"r":2,"de":"Rechenweg vollständig zeigen","en":"Show the full calculation"},{"r":2,"de":"Fall zerlegen, System abgrenzen","en":"Break a case down, define the system"},{"r":2,"de":"begründetes Urteil schreiben","en":"Write a reasoned judgement"},{"r":2,"de":"Entwurf, Konzept, eigener Lösungsweg","en":"Draft, concept, own solution"}],"wissen":[0,2,2,2],"icon":"upload","reflexion":{"de":"Lerntagebuch oder Reflexion zum eigenen Lösungsweg","en":"Learning journal or reflection on their own solution"}},{"id":"bbb","gruppe":"aktivitaet","aufwand":2,"name":{"de":"BigBlueButton","en":"BigBlueButton"},"kurz":{"de":"Videokonferenz im Kurs mit Whiteboard und Gruppenräumen","en":"Video conference in the course with whiteboard and breakout rooms"},"tk":{"de":"Raum im Kurs anlegen; Aufzeichnung und Gruppenräume vorher ausprobieren.","en":"Create a room in the course; try recording and breakout rooms beforehand."},"tpk":{"de":"Live erklären, nachfragen, in Kleingruppen arbeiten. Lautes Denken wird hörbar.","en":"Explain live, ask questions, work in small groups. Thinking aloud becomes audible."},"tck":{"de":"Sprechstunde: Studierende rechnen am Whiteboard vor und begründen jeden Schritt.","en":"Office hour: students solve at the whiteboard and justify each step."},"stufen":[{"r":1,"de":"kurze Abfrage im Gespräch","en":"Short check in conversation"},{"r":2,"de":"Nachfragen in Echtzeit","en":"Questions in real time"},{"r":1,"de":"gemeinsam vorrechnen","en":"Solve together"},{"r":1,"de":"in Gruppenräumen diskutieren","en":"Discuss in breakout rooms"},{"r":1,"de":"Urteile im Gespräch begründen","en":"Justify judgements in discussion"},{"r":1,"de":"gemeinsam am Whiteboard entwerfen","en":"Design together on the whiteboard"}],"wissen":[1,2,1,2],"icon":"webcam","reflexion":{"de":"Lautes Denken im Gespräch","en":"Thinking aloud in conversation"}},{"id":"datenbank","gruppe":"aktivitaet","aufwand":3,"name":{"de":"Datenbank","en":"Database"},"kurz":{"de":"Einträge nach festem Schema sammeln, durchsuchen, kommentieren","en":"Collect, search and comment entries following a fixed schema"},"tk":{"de":"Felder und Ansichten festlegen; braucht Einarbeitung.","en":"Define fields and views; needs some learning."},"tpk":{"de":"Lernende beschreiben Fälle nach demselben Raster und vergleichen sie untereinander.","en":"Learners describe cases using the same template and compare them."},"tck":{"de":"Sammlung „Thermodynamik im Alltag“: Beispiel, Systemgrenze, Zustandsänderung.","en":"Collection “Thermodynamics in daily life”: example, system boundary, change of state."},"stufen":[{"r":1,"de":"Fakten sammeln","en":"Collect facts"},{"r":2,"de":"Beispiele nach Raster beschreiben","en":"Describe examples by template"},{"r":1,"de":"Schema auf neuen Fall anwenden","en":"Apply template to a new case"},{"r":2,"de":"Einträge vergleichen und ordnen","en":"Compare and sort entries"},{"r":1,"de":"Einträge anderer kommentieren und bewerten","en":"Comment on and rate others' entries"},{"r":2,"de":"eigene Fallsammlung aufbauen","en":"Build an own case collection"}],"wissen":[2,2,1,0],"icon":"database"},{"id":"feedback","gruppe":"aktivitaet","aufwand":1,"name":{"de":"Feedback und Befragung","en":"Feedback and questionnaire"},"kurz":{"de":"Fragebögen, auch anonym; die Befragung bietet mehr Fragetypen","en":"Questionnaires, also anonymous; the questionnaire module offers more question types"},"tk":{"de":"Fragen anlegen; Auswertung wird automatisch erstellt.","en":"Add questions; results are compiled automatically."},"tpk":{"de":"Rückmeldung zur Lehre und Selbsteinschätzung der Lernenden. Prüft kein Wissen.","en":"Feedback on teaching and learners' self-assessment. Does not test knowledge."},"tck":{"de":"„Bei welchem Schritt waren Sie am unsichersten: System, Bilanz oder Rechnung?“","en":"“Which step were you least sure about: system, balance or calculation?”"},"stufen":[{"r":0,"de":"besser: Test","en":"better: quiz"},{"r":0,"de":"besser: Forum","en":"better: forum"},{"r":0,"de":"besser: Test oder Aufgabe","en":"better: quiz or assignment"},{"r":0,"de":"besser: Forum oder Aufgabe","en":"better: forum or assignment"},{"r":1,"de":"eigenen Lernstand einschätzen","en":"Assess own progress"},{"r":0,"de":"besser: Wiki oder Aufgabe","en":"better: wiki or assignment"}],"wissen":[0,0,0,2],"icon":"clipboard-list","reflexion":{"de":"eigenen Lernstand einschätzen","en":"Assess their own progress"}},{"id":"forum","gruppe":"aktivitaet","aufwand":1,"name":{"de":"Forum","en":"Forum"},"kurz":{"de":"Schriftlicher Austausch, zeitversetzt","en":"Written discussion, asynchronous"},"tk":{"de":"In Minuten angelegt; Begleiten kostet Zeit.","en":"Set up in minutes; moderating takes time."},"tpk":{"de":"Erklären, begründen, aufeinander antworten. Wer schreibt, legt sein Denken offen.","en":"Explain, justify, reply to each other. Writing makes thinking visible."},"tck":{"de":"„Warum darf man hier mit idealem Gas rechnen? Begründen Sie und antworten Sie auf einen Beitrag.“","en":"“Why may we treat this as an ideal gas? Justify and reply to one post.”"},"stufen":[{"r":0,"de":"besser: Test oder Glossar","en":"better: quiz or glossary"},{"r":2,"de":"in eigenen Worten erklären","en":"Explain in own words"},{"r":1,"de":"Lösungen posten und besprechen","en":"Post and discuss solutions"},{"r":2,"de":"Lösungen vergleichen","en":"Compare solutions"},{"r":2,"de":"Annahmen begründet beurteilen","en":"Judge assumptions with reasons"},{"r":1,"de":"Ideen sammeln und weiterentwickeln","en":"Collect and develop ideas"}],"wissen":[0,2,1,2],"icon":"messages-square","reflexion":{"de":"Vorgehen offenlegen und diskutieren","en":"Share and discuss their approach"}},{"id":"glossar","gruppe":"aktivitaet","aufwand":1,"name":{"de":"Glossar","en":"Glossary"},"kurz":{"de":"Begriffe gemeinsam sammeln und erklären","en":"Collect and explain terms together"},"tk":{"de":"Einfach anzulegen; Begriffe verlinken sich im Kurs von selbst.","en":"Easy to set up; terms are linked automatically across the course."},"tpk":{"de":"Sichert Fachbegriffe. Einträge lassen sich kommentieren und bewerten.","en":"Secures terminology. Entries can be commented on and rated."},"tck":{"de":"isobar, isochor, isotherm – jeweils mit eigenem Alltagsbeispiel.","en":"isobaric, isochoric, isothermal – each with an everyday example."},"stufen":[{"r":2,"de":"Begriffe festhalten","en":"Record terms"},{"r":2,"de":"Begriff mit eigenem Beispiel","en":"Term with own example"},{"r":0,"de":"besser: Test","en":"better: quiz"},{"r":1,"de":"Begriffe voneinander abgrenzen","en":"Distinguish terms"},{"r":1,"de":"Einträge anderer bewerten","en":"Rate others' entries"},{"r":1,"de":"gemeinsames Nachschlagewerk","en":"Shared reference work"}],"wissen":[2,2,0,0],"icon":"book-a"},{"id":"h5p","gruppe":"aktivitaet","aufwand":2,"name":{"de":"H5P (Interaktiver Inhalt)","en":"H5P (interactive content)"},"kurz":{"de":"Interaktive Inhalte: Lückentext, Zuordnen, interaktives Video","en":"Interactive content: fill in the blanks, drag and drop, interactive video"},"tk":{"de":"Einfache Inhaltstypen schnell, interaktive Videos aufwendiger.","en":"Simple content types are quick, interactive videos take longer."},"tpk":{"de":"Kleine Übungen mit sofortiger Rückmeldung. Nur festgelegte Antworten.","en":"Small exercises with instant feedback. Fixed answers only."},"tck":{"de":"Kurven im p-v-Diagramm per Drag & Drop den Zustandsänderungen zuordnen.","en":"Drag curves in a p-v diagram to the matching change of state."},"stufen":[{"r":2,"de":"Begriffe üben","en":"Practise terms"},{"r":2,"de":"Zuordnen und erklären","en":"Match and explain"},{"r":1,"de":"nur festgelegte Lösungen","en":"fixed solutions only"},{"r":1,"de":"Diagramme zuordnen, Schritte ordnen","en":"Match diagrams, order steps"},{"r":0,"de":"besser: Forum oder Gegenseitige Beurteilung","en":"better: forum or workshop"},{"r":0,"de":"besser: Aufgabe oder Wiki","en":"better: assignment or wiki"}],"wissen":[2,2,1,0],"icon":"mouse-pointer-click"},{"id":"lektion","gruppe":"aktivitaet","aufwand":3,"name":{"de":"Lektion","en":"Lesson"},"kurz":{"de":"Lernpfad, der je nach Antwort verzweigt","en":"Learning path that branches depending on answers"},"tk":{"de":"Seiten und Verzweigungen planen; aufwendig.","en":"Plan pages and branches; takes effort."},"tpk":{"de":"Ein Fehler führt zur passenden Erklärung, dann geht es weiter.","en":"A mistake leads to the matching explanation, then learners continue."},"tck":{"de":"Falsche Gaskonstante führt auf eine Seite zur spezifischen Gaskonstante.","en":"A wrong gas constant leads to a page on the specific gas constant."},"stufen":[{"r":2,"de":"Wissen Schritt für Schritt","en":"Knowledge step by step"},{"r":2,"de":"Erklärung bei Fehlern","en":"Explanation on mistakes"},{"r":2,"de":"Verfahren geführt üben","en":"Guided practice"},{"r":1,"de":"Fall in Schritten zerlegen","en":"Break a case into steps"},{"r":0,"de":"besser: Forum oder Gegenseitige Beurteilung","en":"better: forum or workshop"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[2,2,2,0],"icon":"signpost"},{"id":"test","gruppe":"aktivitaet","aufwand":2,"name":{"de":"Test","en":"Quiz"},"kurz":{"de":"Fragen mit automatischer Auswertung","en":"Questions with automatic grading"},"tk":{"de":"Fragen schreiben kostet Zeit; die Fragensammlung ist wiederverwendbar.","en":"Writing questions takes time; the question bank can be reused."},"tpk":{"de":"Sofortige Rückmeldung bei geschlossenen Fragen. Freitext muss von Hand bewertet werden.","en":"Instant feedback on closed questions. Free text must be graded by hand."},"tck":{"de":"Zustandsänderungen ihren Merkmalen zuordnen; Begriffe abfragen.","en":"Match changes of state to their features; check terms."},"stufen":[{"r":2,"de":"Wissen abfragen","en":"Check knowledge"},{"r":2,"de":"Zuordnen, Beispiele erkennen","en":"Match, recognise examples"},{"r":2,"de":"Rechenaufgaben","en":"Calculation tasks"},{"r":1,"de":"mit Fallaufgaben","en":"with case tasks"},{"r":1,"de":"Urteil nur als Auswahl","en":"judgement only as a choice"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[2,2,2,0],"icon":"list-checks"},{"id":"stack","gruppe":"aktivitaet","aufwand":3,"name":{"de":"Test mit STACK","en":"Quiz with STACK"},"kurz":{"de":"Mathematische Fragen mit Formel-Eingabe und wechselnden Zahlen","en":"Maths questions with formula input and changing numbers"},"tk":{"de":"Computeralgebra prüft die Eingabe; Aufgaben zu schreiben braucht Übung.","en":"Computer algebra checks the input; writing questions needs practice."},"tpk":{"de":"Zahlen wechseln bei jedem Versuch. Typische Fehler bekommen eigene Hinweise.","en":"Numbers change on every attempt. Typical mistakes get their own hints."},"tck":{"de":"pV = mRT mit wechselnden Werten; der Einheitenfehler bei R bekommt einen eigenen Hinweis.","en":"pV = mRT with changing values; the unit mistake with R gets its own hint."},"stufen":[{"r":0,"de":"zu aufwendig: Test","en":"too much effort: quiz"},{"r":1,"de":"Zusammenhänge als Formel","en":"Relationships as formulas"},{"r":2,"de":"Verfahren mit wechselnden Werten","en":"Procedures with changing values"},{"r":1,"de":"mehrteilige Aufgaben","en":"multi-part questions"},{"r":0,"de":"besser: Forum oder Aufgabe","en":"better: forum or assignment"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[0,1,2,0],"icon":"sigma"},{"id":"workshop","gruppe":"aktivitaet","aufwand":3,"name":{"de":"Gegenseitige Beurteilung","en":"Workshop (peer assessment)"},"kurz":{"de":"Abgaben nach Kriterien gegenseitig beurteilen","en":"Assess each other's submissions against criteria"},"tk":{"de":"Mehrere Phasen: einreichen, beurteilen, bewerten. Gut planen.","en":"Several phases: submit, assess, grade. Plan ahead."},"tpk":{"de":"Wer fremde Arbeit nach Kriterien prüft, lernt die Kriterien auf die eigene anzuwenden.","en":"Checking others' work against criteria teaches learners to apply them to their own."},"tck":{"de":"Lösungswege gegenseitig prüfen: Systemgrenze? Annahmen? Einheiten?","en":"Peer-check solutions: system boundary? assumptions? units?"},"stufen":[{"r":0,"de":"zu aufwendig: Test","en":"too much effort: quiz"},{"r":1,"de":"Kriterien verstehen","en":"Understand criteria"},{"r":1,"de":"Kriterien anwenden","en":"Apply criteria"},{"r":2,"de":"fremde Lösung zerlegen","en":"Break down another solution"},{"r":2,"de":"Urteil nach Kriterien","en":"Judgement against criteria"},{"r":2,"de":"eigene Arbeit einreichen","en":"Submit own work"}],"wissen":[0,2,2,2],"icon":"users","reflexion":{"de":"Kriterien auch an die eigene Arbeit anlegen","en":"Apply criteria to their own work too"}},{"id":"wiki","gruppe":"aktivitaet","aufwand":1,"name":{"de":"Wiki","en":"Wiki"},"kurz":{"de":"Gemeinsam Texte schreiben und überarbeiten","en":"Write and revise texts together"},"tk":{"de":"Einfach anzulegen; alle Versionen bleiben erhalten.","en":"Easy to set up; every version is kept."},"tpk":{"de":"Gruppen erarbeiten ein gemeinsames Produkt. Die Versionen zeigen, wer was beigetragen hat.","en":"Groups produce a shared result. Versions show who contributed what."},"tck":{"de":"Gruppen-Wiki „Unser Leitfaden: Wann welche Bilanz?“","en":"Group wiki “Our guide: which balance when?”"},"stufen":[{"r":1,"de":"Begriffe zusammentragen","en":"Gather terms"},{"r":2,"de":"gemeinsam erklären","en":"Explain together"},{"r":1,"de":"Beispiele ausarbeiten","en":"Work out examples"},{"r":1,"de":"Inhalte gliedern","en":"Structure content"},{"r":1,"de":"Fassungen überarbeiten","en":"Revise versions"},{"r":2,"de":"gemeinsames Produkt","en":"Joint product"}],"wissen":[1,2,1,1],"icon":"notebook-pen"},{"id":"etherpad","gruppe":"aktivitaet","aufwand":1,"icon":"square-pen","name":{"de":"Etherpad","en":"Etherpad"},"kurz":{"de":"Gemeinsam in Echtzeit an einem Text schreiben","en":"Write one text together in real time"},"tk":{"de":"Pad im Kurs anlegen; Farben zeigen, wer was geschrieben hat.","en":"Create a pad in the course; colours show who wrote what."},"tpk":{"de":"Gruppen schreiben gleichzeitig am selben Text. Jeder Beitrag ist sofort für alle sichtbar.","en":"Groups write the same text at the same time. Every contribution is instantly visible to all."},"tck":{"de":"Pad „Annahmen beim idealen Gas“: Jede Gruppe ergänzt eine Annahme und ein Gegenbeispiel.","en":"Pad “Assumptions for ideal gases”: each group adds one assumption and a counterexample."},"stufen":[{"r":1,"de":"Begriffe sammeln","en":"Collect terms"},{"r":2,"de":"gemeinsam erklären und ergänzen","en":"Explain and add together"},{"r":1,"de":"Lösungsschritte gemeinsam notieren","en":"Note solution steps together"},{"r":1,"de":"Gesichtspunkte sammeln und ordnen","en":"Collect and sort aspects"},{"r":1,"de":"Beiträge kommentieren und abwägen","en":"Comment on and weigh contributions"},{"r":2,"de":"gemeinsamer Entwurf in Echtzeit","en":"Joint draft in real time"}],"wissen":[1,2,1,1]},{"id":"hotquestion","gruppe":"aktivitaet","aufwand":1,"icon":"message-circle-question-mark","name":{"de":"Dringende Frage","en":"Hot question"},"kurz":{"de":"Fragen sammeln, alle stimmen für die wichtigsten","en":"Collect questions, everyone votes for the most important"},"tk":{"de":"In Minuten angelegt; Fragen auf Wunsch anonym.","en":"Set up in minutes; questions can be anonymous."},"tpk":{"de":"Lernende formulieren, was sie nicht verstehen. Die Stimmen zeigen, wo die Lücke für viele liegt.","en":"Learners phrase what they do not understand. The votes show where many share the gap."},"tck":{"de":"Vor der Übung: „Was ist Ihnen an der Systemgrenze unklar?“ Die drei meistgewählten Fragen werden besprochen.","en":"Before the tutorial: “What is unclear about the system boundary?” The three top questions are discussed."},"stufen":[{"r":1,"de":"offene Begriffe sammeln","en":"Collect unclear terms"},{"r":2,"de":"Verständnisfragen formulieren","en":"Phrase comprehension questions"},{"r":0,"de":"besser: Test","en":"better: quiz"},{"r":1,"de":"Fragen bündeln und gewichten","en":"Group and weigh questions"},{"r":1,"de":"wichtigste Fragen auswählen","en":"Pick the most important questions"},{"r":0,"de":"besser: Aufgabe oder Wiki","en":"better: assignment or wiki"}],"wissen":[1,2,1,2],"reflexion":{"de":"eigene Wissenslücke benennen","en":"Name their own knowledge gap"}},{"id":"podcast","gruppe":"aktivitaet","aufwand":2,"icon":"podcast","name":{"de":"Podcast","en":"Podcast"},"kurz":{"de":"Audio- und Videoepisoden veröffentlichen, auch von Studierenden","en":"Publish audio and video episodes, also by students"},"tk":{"de":"Episoden hochladen; Studierende brauchen nur ein Smartphone zum Aufnehmen.","en":"Upload episodes; students only need a smartphone to record."},"tpk":{"de":"Wer erklärt und aufnimmt, ordnet sein Wissen. Andere hören, kommentieren und bewerten.","en":"Explaining and recording organises knowledge. Others listen, comment and rate."},"tck":{"de":"Drei-Minuten-Episode: „Warum kühlt sich Gas beim Ausströmen ab?“","en":"Three-minute episode: “Why does gas cool down when it escapes?”"},"stufen":[{"r":1,"de":"Inhalte zum Nachhören","en":"Content to listen again"},{"r":2,"de":"in eigenen Worten erklären","en":"Explain in own words"},{"r":0,"de":"besser: Test oder Aufgabe","en":"better: quiz or assignment"},{"r":1,"de":"Fall im Gespräch zerlegen","en":"Break a case down in conversation"},{"r":1,"de":"Episoden anderer bewerten","en":"Rate others' episodes"},{"r":2,"de":"eigene Episode produzieren","en":"Produce an own episode"}],"wissen":[1,2,1,1]},{"id":"ki-assistent","gruppe":"ki","aufwand":2,"reife":"pilot","name":{"de":"KI-Assistent zum Kursmaterial","en":"AI assistant for course material"},"kurz":{"de":"Beantwortet Fragen nur aus dem hinterlegten Material und nennt die Fundstelle","en":"Answers questions from the stored material only and cites the passage"},"tk":{"de":"Einrichtung mit dem ZWEK; Lehrende pflegen das Material.","en":"Set up with ZWEK; teachers maintain the material."},"tpk":{"de":"Nachfragen jederzeit möglich. Lernende prüfen die zitierte Stelle selbst.","en":"Questions possible at any time. Learners check the cited passage themselves."},"tck":{"de":"„Warum hier die spezifische Gaskonstante?“ – die Antwort verweist auf die Stelle im Skript.","en":"“Why the specific gas constant here?” – the answer points to the passage in the script."},"stufen":[{"r":2,"de":"Nachschlagen mit Fundstelle","en":"Look up with source"},{"r":2,"de":"Erklärung auf Nachfrage","en":"Explanation on request"},{"r":1,"de":"Hilfe beim Verfahren","en":"Help with procedures"},{"r":0,"de":"besser: KI-Tutor oder Forum","en":"better: AI tutor or forum"},{"r":1,"de":"Antwort gegen Quelle prüfen","en":"Check answer against source"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[2,2,1,0],"icon":"bot"},{"id":"ki-tutor","gruppe":"ki","aufwand":3,"reife":"einsatz","name":{"de":"KI-Tutor im Dialog","en":"AI tutor in dialogue"},"kurz":{"de":"Gibt keine Lösung, sondern fragt gestuft nach","en":"Gives no solution but asks step by step"},"tk":{"de":"Systemanweisung schreiben und mit echten Fehlern testen; nur freigegebene Plattform.","en":"Write the system prompt and test it with real mistakes; approved platform only."},"tpk":{"de":"Lernende müssen ihren nächsten Schritt in Worte fassen. Das macht das eigene Vorgehen sichtbar.","en":"Learners must put their next step into words. This makes their approach visible."},"tck":{"de":"Nach falschem Ergebnis: „Welches System haben Sie abgegrenzt? Zeigen Sie Ihren Zwischenschritt.“","en":"After a wrong result: “Which system did you define? Show your intermediate step.”"},"stufen":[{"r":1,"de":"Begriffe abfragen lassen","en":"Be quizzed on terms"},{"r":2,"de":"Erklären im Gespräch","en":"Explain in conversation"},{"r":2,"de":"gestufte Hilfe beim Rechnen","en":"Graded hints while calculating"},{"r":2,"de":"nach dem Fehler fragen","en":"Ask about the mistake"},{"r":1,"de":"Annahmen hinterfragen","en":"Question assumptions"},{"r":0,"de":"besser: Aufgabe","en":"better: assignment"}],"wissen":[1,2,2,2],"icon":"bot-message-square","reflexion":{"de":"nächsten Schritt in Worte fassen","en":"Put the next step into words"}},{"id":"ki-feedback","gruppe":"ki","aufwand":3,"reife":"konzept","name":{"de":"KI-Rückmeldung auf den Lösungsweg","en":"AI feedback on the solution path"},"kurz":{"de":"Handschriftlicher Weg wird erkannt und nach Kriterien geprüft","en":"Handwritten path is recognised and checked against criteria"},"tk":{"de":"Texterkennung plus Prüfkriterien; Lehrende sehen die Grenzfälle.","en":"Text recognition plus criteria; teachers see the edge cases."},"tpk":{"de":"Rückmeldung auf den Weg statt nur auf das Ergebnis. Entlastet die betreuungsintensive Abgabe.","en":"Feedback on the path, not only the result. Relieves the labour-intensive submission."},"tck":{"de":"Hochgeladener Rechenweg: Fehlt die Skizze? Stimmt die Einheit in Schritt 3?","en":"Uploaded calculation: is the sketch missing? Is the unit in step 3 right?"},"stufen":[{"r":0,"de":"besser: Test","en":"better: quiz"},{"r":0,"de":"besser: Forum oder KI-Tutor","en":"better: forum or AI tutor"},{"r":2,"de":"Rechenweg Schritt für Schritt prüfen","en":"Check the calculation step by step"},{"r":2,"de":"Aufbau des Lösungswegs","en":"Structure of the solution"},{"r":1,"de":"Hinweise zu Kriterien, Urteil bei Lehrenden","en":"Hints on criteria, judgement stays with teachers"},{"r":1,"de":"Rückmeldung auf eigenen Entwurf","en":"Feedback on own draft"}],"wissen":[0,1,2,1],"icon":"scan-text"},{"id":"ki-pruefen","gruppe":"ki","aufwand":1,"reife":"methode","name":{"de":"KI-Antwort prüfen lassen","en":"Critique an AI answer"},"kurz":{"de":"Eine vorab erzeugte KI-Antwort wird zum Prüfgegenstand","en":"A pre-generated AI answer becomes the object of review"},"tk":{"de":"Antwort vorab erzeugen und als Material oder Aufgabe ausgeben. Lernende brauchen kein Konto.","en":"Generate the answer beforehand and hand it out as material or a task. Learners need no account."},"tpk":{"de":"Lernende suchen Fehler, prüfen Annahmen und begründen ihr Urteil. Die KI ist Gegenstand, nicht Helfer.","en":"Learners look for errors, check assumptions and justify their verdict. The AI is the object, not the helper."},"tck":{"de":"Eine KI-Lösung behandelt Luft bei 200 bar als ideales Gas: Ist die Annahme haltbar?","en":"An AI solution treats air at 200 bar as an ideal gas: does the assumption hold?"},"stufen":[{"r":0,"de":"besser: Test","en":"better: quiz"},{"r":1,"de":"Erklärung nachvollziehen","en":"Follow the explanation"},{"r":1,"de":"Rechnung nachrechnen","en":"Re-do the calculation"},{"r":2,"de":"Fehler und Lücken finden","en":"Find errors and gaps"},{"r":2,"de":"Annahmen und Quellen beurteilen","en":"Judge assumptions and sources"},{"r":1,"de":"verbesserte Fassung schreiben","en":"Write an improved version"}],"wissen":[1,2,1,2],"icon":"search-check","reflexion":{"de":"eigene Prüfstrategie benennen","en":"Name their own checking strategy"}}],"frage":{"de":"Was sollen Ihre Studierenden tun?","en":"What should your students do?"},"ziele":[{"id":"1","stufe":1,"icon":"brain","titel":{"de":"Grundlagen sichern","en":"Secure the basics"},"frage":{"de":"Begriffe, Fakten und Formeln parat haben","en":"Have terms, facts and formulas at hand"},"auftrag":{"de":"„Ordnen Sie die zehn Fachbegriffe ihren Definitionen zu.“","en":"“Match the ten key terms to their definitions.”"},"tipp":{"de":"Kurz und oft üben, mit sofortiger Rückmeldung.","en":"Practise briefly and often, with instant feedback."},"empfohlen":["test","h5p","glossar","ki-assistent"]},{"id":"2","stufe":2,"icon":"lightbulb","titel":{"de":"Erklären können","en":"Be able to explain"},"frage":{"de":"Zusammenhänge in eigenen Worten erklären","en":"Explain relationships in their own words"},"auftrag":{"de":"„Erklären Sie in fünf Sätzen einer Person ohne Vorwissen, warum …“","en":"“In five sentences, explain to someone without prior knowledge why …”"},"tipp":{"de":"Eigene Worte verlangen, keine auswendig gelernten Definitionen.","en":"Ask for their own words, not memorised definitions."},"empfohlen":["forum","h5p","video","ki-tutor"]},{"id":"3","stufe":3,"icon":"wrench","titel":{"de":"Verfahren üben","en":"Practise procedures"},"frage":{"de":"ein bekanntes Verfahren sicher auf neue Fälle anwenden","en":"Apply a known procedure reliably to new cases"},"auftrag":{"de":"„Berechnen Sie … mit Ihren Werten und zeigen Sie den Rechenweg.“","en":"“Calculate … with your values and show your working.”"},"tipp":{"de":"Wechselnde Werte statt immer derselben Aufgabe.","en":"Changing values instead of the same task every time."},"empfohlen":["test","stack","aufgabe","ki-tutor"]},{"id":"4","stufe":4,"icon":"search","titel":{"de":"Zerlegen und vergleichen","en":"Break down and compare"},"frage":{"de":"einen Fall zerlegen und Lösungen vergleichen","en":"Break a case down and compare solutions"},"auftrag":{"de":"„Vergleichen Sie zwei Lösungswege: Wo unterscheiden sie sich und warum?“","en":"“Compare two solutions: where do they differ, and why?”"},"tipp":{"de":"Zwei Lösungen nebeneinanderstellen und Unterschiede benennen lassen.","en":"Put two solutions side by side and have the differences named."},"empfohlen":["forum","aufgabe","workshop","ki-pruefen"]},{"id":"5","stufe":5,"icon":"scale","titel":{"de":"Begründet urteilen","en":"Judge with reasons"},"frage":{"de":"prüfen und begründet entscheiden","en":"Check and decide with reasons"},"auftrag":{"de":"„Ist diese Lösung haltbar? Beurteilen Sie sie nach den drei Kriterien.“","en":"“Does this solution hold? Judge it by the three criteria.”"},"tipp":{"de":"Kriterien vorher bekannt geben. Kein Urteil ohne Begründung.","en":"Share the criteria beforehand. No verdict without reasons."},"empfohlen":["forum","workshop","aufgabe","ki-pruefen"]},{"id":"6","stufe":6,"icon":"pen-tool","titel":{"de":"Eigenes entwickeln","en":"Create something new"},"frage":{"de":"etwas Eigenes entwerfen oder entwickeln","en":"Design or develop something of their own"},"auftrag":{"de":"„Entwerfen Sie eine eigene Aufgabe zu … samt Musterlösung.“","en":"“Design your own task on … including a model answer.”"},"tipp":{"de":"Zwischenstände einfordern und vor der Endabgabe rückmelden.","en":"Ask for drafts and give feedback before the final version."},"empfohlen":["aufgabe","wiki","workshop","etherpad"]},{"id":"r","wissen":"M","icon":"refresh-ccw","titel":{"de":"Eigenes Vorgehen reflektieren","en":"Reflect on their approach"},"frage":{"de":"das eigene Vorgehen begründen und verbessern","en":"Justify and improve their own approach"},"auftrag":{"de":"„Womit haben Sie angefangen und warum? Was machen Sie nächstes Mal anders?“","en":"“Where did you start, and why? What will you do differently next time?”"},"tipp":{"de":"Kommt in vielen Kursen zu kurz. Schon eine Reflexionsfrage je Abgabe hilft.","en":"Often neglected in courses. One reflection question per submission already helps."},"empfohlen":["aufgabe","forum","feedback","ki-tutor"]}],"regeln":[{"icon":"compass","de":"Erst das Ziel, dann das Werkzeug.","en":"Goal first, then the tool."},{"icon":"file-check","de":"Kein Werkzeug ohne Arbeitsauftrag: Erst der Auftrag macht aus Technik eine Lernhandlung.","en":"No tool without a task: only the task turns technology into learning."},{"icon":"shield-check","de":"KI: nur freigegebene Dienste, keine personenbezogenen Daten, Noten gibt der Mensch.","en":"AI: approved services only, no personal data, grades come from people."}]};
+const ICONS = {"arrow-left":"<path d=\"m12 19-7-7 7-7\" /><path d=\"M19 12H5\" />","arrow-right":"<path d=\"M5 12h14\" /><path d=\"m12 5 7 7-7 7\" />","book-a":"<path d=\"M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20\" /><path d=\"m8 13 4-7 4 7\" /><path d=\"M9.1 11h5.7\" />","book-open":"<path d=\"M12 5v16\" /><path d=\"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z\" />","bot-message-square":"<path d=\"M12 6V2H8\" /><path d=\"M15 11v2\" /><path d=\"M2 12h2\" /><path d=\"M20 12h2\" /><path d=\"M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z\" /><path d=\"M9 11v2\" />","bot":"<path d=\"M12 8V4H8\" /><rect width=\"16\" height=\"12\" x=\"4\" y=\"8\" rx=\"2\" /><path d=\"M2 14h2\" /><path d=\"M20 14h2\" /><path d=\"M15 13v2\" /><path d=\"M9 13v2\" />","brain":"<path d=\"M12 18V5\" /><path d=\"M15 13a4.17 4.17 0 01-3-4 4.17 4.17 0 01-3 4\" /><path d=\"M17.707 6.294A3 3 0 1012 5a3 3 0 10-5.707 1.294\" /><path d=\"M17.996 5.125a4 4 0 012.526 5.77\" /><path d=\"M18 18a4 4 0 002-7.465\" /><path d=\"M19.967 17.482a4 4 0 11-7.967.517 4 4 0 11-7.967-.517\" /><path d=\"M6 18a4 4 0 01-2-7.465\" /><path d=\"M6.004 5.125a4 4 0 00-2.526 5.77\" />","clipboard-list":"<rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\" ry=\"1\" /><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\" /><path d=\"M12 11h4\" /><path d=\"M12 16h4\" /><path d=\"M8 11h.01\" /><path d=\"M8 16h.01\" />","compass":"<circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" />","database":"<ellipse cx=\"12\" cy=\"5\" rx=\"9\" ry=\"3\" /><path d=\"M3 5V19A9 3 0 0 0 21 19V5\" /><path d=\"M3 12A9 3 0 0 0 21 12\" />","file-check":"<path d=\"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z\" /><path d=\"M14 2v5a1 1 0 0 0 1 1h5\" /><path d=\"m9 15 2 2 4-4\" />","folder":"<path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\" />","info":"<circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 16v-4\" /><path d=\"M12 8h.01\" />","layers":"<path d=\"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z\" /><path d=\"M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12\" /><path d=\"M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17\" />","lightbulb":"<path d=\"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5\" /><path d=\"M9 18h6\" /><path d=\"M10 22h4\" />","link":"<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\" /><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\" />","list-checks":"<path d=\"M13 5h8\" /><path d=\"M13 12h8\" /><path d=\"M13 19h8\" /><path d=\"m3 17 2 2 4-4\" /><path d=\"m3 7 2 2 4-4\" />","message-circle-question-mark":"<path d=\"M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719\" /><path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /><path d=\"M12 17h.01\" />","messages-square":"<path d=\"M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z\" /><path d=\"M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1\" />","mouse-pointer-click":"<path d=\"M14 4.1 12 6\" /><path d=\"m5.1 8-2.9-.8\" /><path d=\"m6 12-1.9 2\" /><path d=\"M7.2 2.2 8 5.1\" /><path d=\"M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z\" />","notebook-pen":"<path d=\"M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4\" /><path d=\"M2 6h4\" /><path d=\"M2 10h4\" /><path d=\"M2 14h4\" /><path d=\"M2 18h4\" /><path d=\"M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z\" />","pen-tool":"<path d=\"m18 13-.654-4.736a4 4 0 00-2.756-3.266l-9.163-2.9a2 2 0 00-2.017.493l-.82.819a2 2 0 00-.492 2.017l2.9 9.163a4 4 0 003.266 2.756L13 18\" /><path d=\"M18.648 12.352a1.205 1.205 0 011.704 0l1.296 1.296a1.205 1.205 0 010 1.704l-6.296 6.296a1.205 1.205 0 01-1.704 0l-1.296-1.296a1.205 1.205 0 010-1.704z\" /><path d=\"m3 3 6.586 6.586\" /><circle cx=\"11\" cy=\"11\" r=\"2\" />","pencil-line":"<path d=\"M13 21h8\" /><path d=\"m15 5 4 4\" /><path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" />","podcast":"<path d=\"M12 17v4\" /><path d=\"M18 11a6 6 0 00-3-5.197\" /><path d=\"M2 11a10 10 0 015-8.662\" /><path d=\"M22 11a10 10 0 00-5-8.662\" /><path d=\"M6 11a6 6 0 013-5.197\" /><path d=\"M9 21h6\" /><rect x=\"10\" y=\"9\" width=\"4\" height=\"8\" rx=\"2\" />","printer":"<path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\" /><path d=\"M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6\" /><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\" rx=\"1\" />","refresh-ccw":"<path d=\"M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\" /><path d=\"M3 3v5h5\" /><path d=\"M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16\" /><path d=\"M16 16h5v5\" />","scale":"<path d=\"M12 3v18\" /><path d=\"m19 8 3 8a5 5 0 0 1-6 0zV7\" /><path d=\"M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1\" /><path d=\"m5 8 3 8a5 5 0 0 1-6 0zV7\" /><path d=\"M7 21h10\" />","scan-text":"<path d=\"M3 7V5a2 2 0 0 1 2-2h2\" /><path d=\"M17 3h2a2 2 0 0 1 2 2v2\" /><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\" /><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\" /><path d=\"M7 8h8\" /><path d=\"M7 12h10\" /><path d=\"M7 16h6\" />","search-check":"<path d=\"m8 11 2 2 4-4\" /><circle cx=\"11\" cy=\"11\" r=\"8\" /><path d=\"m21 21-4.3-4.3\" />","search":"<path d=\"m21 21-4.34-4.34\" /><circle cx=\"11\" cy=\"11\" r=\"8\" />","shield-check":"<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /><path d=\"m9 12 2 2 4-4\" />","sigma":"<path d=\"M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2\" />","signpost":"<path d=\"M12 13v8\" /><path d=\"M12 3v3\" /><path d=\"M2.354 10.354a1.207 1.207 0 0 1 0-1.708l2.06-2.06A2 2 0 0 1 5.828 6h12.344a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H5.828a2 2 0 0 1-1.414-.586z\" />","sparkles":"<path d=\"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z\" /><path d=\"M20 2v4\" /><path d=\"M22 4h-4\" /><circle cx=\"4\" cy=\"20\" r=\"2\" />","square-pen":"<path d=\"M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\" /><path d=\"M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z\" />","upload":"<path d=\"M12 3v12\" /><path d=\"m17 8-5-5-5 5\" /><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" />","users":"<path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\" /><path d=\"M16 3.128a4 4 0 0 1 0 7.744\" /><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\" /><circle cx=\"9\" cy=\"7\" r=\"4\" />","video":"<path d=\"m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5\" /><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\" />","vote":"<path d=\"m9 12 2 2 4-4\" /><path d=\"M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z\" /><path d=\"M22 19H2\" />","webcam":"<circle cx=\"12\" cy=\"10\" r=\"8\" /><circle cx=\"12\" cy=\"10\" r=\"3\" /><path d=\"M7 22h10\" /><path d=\"M12 22v-4\" />","wrench":"<path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z\" />"};
+
+const U = {
+  de: { plakat: "Plakat (PDF)", tabZiel: "Leitfaden", tabWz: "Werkzeuge A–Z", tabHg: "Hintergrund",
+    einleitung: "Wählen Sie ein Ziel. Sie bekommen vier passende Werkzeuge, einen Beispielauftrag und einen Tipp.",
+    weiter: "Werkzeuge zeigen", zurueck: "Alle Ziele", auftrag: "Beispielauftrag", tipp: "Tipp",
+    empfohlen: "Unsere Empfehlung", weitere: "Ebenfalls gut geeignet", auch: "Auch möglich, mit mehr Planung",
+    gutWeil: "Gut für: ", mehr: "Mehr dazu", was: "Was Studierende tun", aufwand: "Aufwand und Voraussetzungen",
+    beispiel: "Beispiel (Thermodynamik)", passt: "Passt es zu Ihrem Fach?",
+    passtText: "Prüfen Sie: Passen Werkzeug, Methode und Inhalt in Ihrem Fach zusammen? Erst der Arbeitsauftrag macht daraus eine Lernhandlung.",
+    aufwandL: ["", "wenig Aufwand", "mittlerer Aufwand", "viel Aufwand"], ki: "KI",
+    gutfuer: "Gut für:", wzEinl: "Alle Werkzeuge mit Aufwand und den Zielen, für die sie sich gut eignen.",
+    regeln: "Drei Regeln", hgTitel: "Hintergrund", kursTitel: "Ein Beispiel: Wo setzt ein Kurs an?",
+    kursUnter: "Eingabefelder je Kombination aus Wissensart (Zeilen) und Prozessstufe (Spalten), insgesamt __N__. – = keines.",
+    lizenz: "Lizenz CC BY-NC-SA 4.0 · Icons: Lucide (ISC) · Stand ", quellen: "Grundlagen und Herkunft" },
+  en: { plakat: "Poster (PDF)", tabZiel: "Guide", tabWz: "Tools A–Z", tabHg: "Background",
+    einleitung: "Pick a goal. You get four suitable tools, a sample task and a tip.",
+    weiter: "Show tools", zurueck: "All goals", auftrag: "Sample task", tipp: "Tip",
+    empfohlen: "Our recommendation", weitere: "Also well suited", auch: "Also possible, with more planning",
+    gutWeil: "Good for: ", mehr: "More", was: "What students do", aufwand: "Effort and prerequisites",
+    beispiel: "Example (thermodynamics)", passt: "Does it fit your subject?",
+    passtText: "Check: do tool, method and content fit together in your subject? Only the task turns it into learning.",
+    aufwandL: ["", "low effort", "medium effort", "high effort"], ki: "AI",
+    gutfuer: "Good for:", wzEinl: "All tools with their effort and the goals they suit well.",
+    regeln: "Three rules", hgTitel: "Background", kursTitel: "An example: where does a course focus?",
+    kursUnter: "Input fields per combination of knowledge type (rows) and cognitive process (columns), __N__ in total. – = none.",
+    lizenz: "Licence CC BY-NC-SA 4.0 · Icons: Lucide (ISC) · As of ", quellen: "Foundations and origin" }
+};
+
+const S = { lang: "de", view: "ziel", ziel: null };
+const t = o => (o && (o[S.lang] ?? o.de)) ?? "";
+const tt = (o, k) => o[k + "_" + S.lang] ?? o[k + "_de"];
+const u = k => U[S.lang][k];
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k === "text") e.textContent = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+  }
+  for (const c of kids) if (c != null && c !== false) e.append(c);
+  return e;
+}
+function icon(name) {
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("class", "ic"); s.setAttribute("aria-hidden", "true");
+  s.innerHTML = ICONS[name] || ""; return s;
+}
+function aufwand(r) {
+  const s = el("span", { class: "aufwand" });
+  for (let i = 1; i <= 3; i++) s.append(el("i", { class: i <= r ? "an" : "", "aria-hidden": "true" }));
+  s.append(el("span", { text: u("aufwandL")[r] }));
+  return s;
+}
+const wIdx = id => D.wissen.findIndex(w => w.id === id);
+const wzById = id => D.werkzeuge.find(w => w.id === id);
+function eignung(wz, z) { return z.stufe ? wz.stufen[z.stufe - 1].r : wz.wissen[wIdx(z.wissen)]; }
+function zielText(wz, z) { return z.stufe ? t(wz.stufen[z.stufe - 1]) : t(wz.reflexion || wz.kurz); }
+const sortiere = xs => xs.sort((a, b) => a.aufwand - b.aufwand || t(a.name).localeCompare(t(b.name)));
+
+function werkzeugKarte(wz, z) {
+  const ki = wz.gruppe === "ki";
+  const et = el("div", { class: "etiketten" }, aufwand(wz.aufwand));
+  if (ki) et.append(el("span", { class: "pille ki", text: u("ki") + " · " + t(D.reife[wz.reife]) }));
+  const was = z ? el("p", { class: "was" }, el("b", { text: u("gutWeil") }), zielText(wz, z)) : el("p", { class: "was", text: t(wz.kurz) });
+  const kids = [el("div", { class: "oben" }, el("div", { class: "icon" }, icon(wz.icon)), el("h4", { text: t(wz.name) })), was, et];
+  if (!z) {
+    const gut = D.ziele.filter(zz => eignung(wz, zz) === 2);
+    if (gut.length) kids.push(el("div", { class: "gutfuer" }, el("span", { text: u("gutfuer") }),
+      ...gut.map(zz => el("span", { class: "z" }, icon(zz.icon), t(zz.titel)))));
+  }
+  const dl = el("dl", {}, el("dt", { text: u("was") }), el("dd", { text: t(wz.tpk) }),
+    el("dt", { text: u("aufwand") }), el("dd", { text: t(wz.tk) }),
+    el("dt", { text: u("beispiel") }), el("dd", { text: t(wz.tck) }),
+    el("dt", { text: u("passt") }), el("dd", { text: u("passtText") }));
+  const det = el("details", {}, el("summary", { text: u("mehr") }), dl);
+  if (ki) det.append(el("p", { class: "klein", text: tt(D.hinweise, "ki") }));
+  kids.push(det);
+  return el("article", { class: "wz" + (ki ? " ki" : "") }, ...kids);
+}
+const chip = wz => el("span", {}, icon(wz.icon), t(wz.name));
+
+function ansichtZiele() {
+  return [
+    el("h2", { class: "gross", text: t(D.frage) }), el("p", { class: "einleitung", text: u("einleitung") }),
+    el("div", { class: "ziele" }, ...D.ziele.map(z => el("button", { class: "ziel", type: "button", onclick: () => geheZu("ziel-" + z.id) },
+      el("span", { class: "kreis" }, icon(z.icon)), el("strong", { text: t(z.titel) }), el("span", { class: "f", text: t(z.frage) }),
+      el("span", { class: "weiter" }, u("weiter"), icon("arrow-right"))))),
+    el("h3", { class: "abschnitt", text: u("regeln") }),
+    el("div", { class: "regeln" }, ...D.regeln.map(r => el("div", { class: "box" }, icon(r.icon), el("span", { text: t(r) }))))
+  ];
+}
+
+function ansichtZiel(z) {
+  const empf = z.empfohlen.map(wzById);
+  const weitere = sortiere(D.werkzeuge.filter(w => eignung(w, z) === 2 && !z.empfohlen.includes(w.id)));
+  const auch = sortiere(D.werkzeuge.filter(w => eignung(w, z) === 1));
+  const kids = [
+    el("div", { class: "zurueck" }, el("button", { type: "button", onclick: () => geheZu("") }, icon("arrow-left"), u("zurueck"))),
+    el("div", { class: "detailkopf" }, el("span", { class: "kreis" }, icon(z.icon)),
+      el("div", {}, el("h2", { text: t(z.titel) }), el("p", { text: t(z.frage) }))),
+    el("div", { class: "paar" },
+      el("div", { class: "box" }, icon("pencil-line"), el("div", {}, el("b", { text: u("auftrag") }), t(z.auftrag))),
+      el("div", { class: "box" }, icon("lightbulb"), el("div", {}, el("b", { text: u("tipp") }), t(z.tipp)))),
+    el("h3", { class: "abschnitt", text: u("empfohlen") }),
+    el("div", { class: "werkzeuge" }, ...empf.map(w => werkzeugKarte(w, z)))
+  ];
+  if (weitere.length) kids.push(el("h3", { class: "abschnitt", text: u("weitere") }), el("div", { class: "chips" }, ...weitere.map(chip)));
+  if (auch.length) kids.push(el("h3", { class: "abschnitt", text: u("auch") }), el("div", { class: "chips leise" }, ...auch.map(chip)));
+  return kids;
+}
+
+function ansichtWerkzeuge() {
+  const kids = [el("h2", { class: "gross", text: u("tabWz") }), el("p", { class: "einleitung", text: u("wzEinl") })];
+  for (const g of D.gruppen) {
+    const ws = D.werkzeuge.filter(w => w.gruppe === g.id).sort((a, b) => t(a.name).localeCompare(t(b.name)));
+    kids.push(el("h3", { class: "gruppe", text: t(g) }), el("div", { class: "werkzeuge" }, ...ws.map(w => werkzeugKarte(w, null))));
+  }
+  return kids;
+}
+
+function ansichtHintergrund() {
+  const k = D.kurs210, max = k ? Math.max(...Object.values(k.zellen)) : 0;
+  const kopf = el("tr", {}, el("td", { style: "background:none" }), ...D.stufen.map(s => el("th", { scope: "col", text: t(s) })));
+  const zeilen = !k ? [] : D.wissen.map(w => el("tr", {}, el("th", { scope: "row", text: t(w) }), ...D.stufen.map(s => {
+    const n = k.zellen[w.id + "-" + s.id] || 0;
+    const td = el("td", { class: n ? "voll" : "", text: n ? String(n) : "–" });
+    if (n) td.style.background = `color-mix(in srgb, #A0001C ${Math.round(40 + 60 * Math.sqrt(n / max))}%, #555)`;
+    return td;
+  })));
+  return [
+    el("h2", { class: "gross", text: u("hgTitel") }),
+    el("div", { class: "text" }, el("h3", { text: "Anderson & Krathwohl" }), el("p", { text: tt(D.hinweise, "lesen") }),
+      el("p", { text: D.stufen.map(s => s.id + " " + t(s)).join(" · ") }), el("p", { text: D.wissen.map(w => t(w)).join(" · ") })),
+    el("div", { class: "text" }, el("h3", { text: "TPACK" }), el("p", { text: tt(D.hinweise, "tpack") }), el("p", { text: tt(D.hinweise, "urteil") })),
+    !k ? null : el("div", { class: "text" }, el("h3", { text: u("kursTitel") }), el("p", { text: tt(k, "text") }),
+      el("p", { style: "color:var(--leise)", text: u("kursUnter").replace("__N__", k.n) }),
+      el("div", { class: "rahmen" }, el("table", { class: "matrix" }, el("caption", { class: "unsichtbar", text: u("kursUnter").replace("__N__", k.n) }), el("thead", {}, kopf), el("tbody", {}, ...zeilen))),
+      el("p", { style: "color:var(--leise)", text: tt(k, "grenze") })),
+    el("div", { class: "text" }, el("h3", { text: u("quellen") }), el("ul", {}, ...D.quellen.map(q => el("li", { text: q }))))
+  ];
+}
+
+function geheZu(hash) {
+  history.pushState(null, "", hash ? "#" + hash : location.pathname + location.search);
+  leseHash(); render(); window.scrollTo(0, 0); document.getElementById("inhalt").focus({ preventScroll: true });
+}
+function leseHash() {
+  const h = location.hash.slice(1);
+  if (h.startsWith("ziel-") && D.ziele.some(z => "ziel-" + z.id === h)) { S.view = "ziel"; S.ziel = h.slice(5); }
+  else if (h === "werkzeuge" || h === "hintergrund") { S.view = h; S.ziel = null; }
+  else { S.view = "ziel"; S.ziel = null; }
+}
+function render() {
+  document.documentElement.lang = S.lang;
+  document.title = t(D.titel);
+  document.getElementById("titel").textContent = t(D.titel);
+  document.getElementById("untertitel").textContent = t(D.untertitel);
+  const pl = document.getElementById("plakat"); pl.replaceChildren(icon("printer"), u("plakat")); pl.href = "plakat-" + S.lang + ".pdf";
+  document.querySelectorAll("#sprachgruppe button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === S.lang)));
+  for (const [v, k] of [["ziel", "tabZiel"], ["werkzeuge", "tabWz"], ["hintergrund", "tabHg"]]) {
+    const b = document.getElementById("tab-" + v); b.textContent = u(k); b.setAttribute("aria-selected", String(S.view === v));
+  }
+  const z = D.ziele.find(x => x.id === S.ziel);
+  const inhalt = S.view === "werkzeuge" ? ansichtWerkzeuge() : S.view === "hintergrund" ? ansichtHintergrund() : z ? ansichtZiel(z) : ansichtZiele();
+  document.getElementById("inhalt").replaceChildren(...inhalt.filter(Boolean));
+  document.getElementById("fuss").textContent = u("lizenz") + D.stand;
+}
+function startSprache() {
+  try { const g = localStorage.getItem("wzu-lang"); if (g === "de" || g === "en") return g; } catch (e) {}
+  for (const l of (navigator.languages || [navigator.language || ""])) { const k = String(l).slice(0, 2).toLowerCase(); if (k === "de" || k === "en") return k; }
+  return "de";
+}
+document.querySelectorAll("#sprachgruppe button").forEach(b => b.addEventListener("click", () => {
+  S.lang = b.dataset.lang; try { localStorage.setItem("wzu-lang", S.lang); } catch (e) {} render();
+}));
+document.querySelectorAll("#reiter button").forEach(b => b.addEventListener("click", () => geheZu(b.dataset.view === "ziel" ? "" : b.dataset.view)));
+window.addEventListener("popstate", () => { leseHash(); render(); });
+S.lang = startSprache(); leseHash(); render();
 </script>
 </body>
 </html>
