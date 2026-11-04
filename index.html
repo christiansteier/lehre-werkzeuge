@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lehren und Lernen mit digitalen Werkzeugen</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--text:#1d1d1f;--leise:#5c5c63;--akzent:#0a5fb4;--akzent-text:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--text:#f5f5f7;--leise:#a1a1a6;--akzent:#4da3ff;--akzent-text:#000}}
+@media (prefers-contrast:more){:root{--leise:var(--text)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);line-height:1.5;font-size:1.0625rem}
+.huelle{max-width:52rem;margin:0 auto;padding:1.5rem 1rem 4rem}
+.kopf{display:flex;justify-content:flex-end}
+.sprache{display:flex;gap:.25rem}
+button{font:inherit;min-height:44px;min-width:44px;border-radius:10px;border:1px solid #d2d2d7;background:var(--card);color:var(--text);cursor:pointer}
+button[aria-pressed=true]{background:var(--akzent);color:var(--akzent-text);border-color:var(--akzent)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--akzent);outline-offset:2px}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.01em;margin:.5rem 0}
+.unter{color:var(--leise);margin:0 0 2rem}
+.raster{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+a.karte{display:block;background:var(--card);border-radius:16px;padding:1.5rem;text-decoration:none;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08);min-height:44px}
+a.karte:hover{box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.fuer{color:var(--akzent);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em}
+.karte h2{margin:.25rem 0 .5rem;font-size:1.3rem}
+.karte p{margin:0;color:var(--leise)}
+.los{display:inline-block;margin-top:1rem;font-weight:600;color:var(--akzent)}
+footer{color:var(--leise);font-size:.9rem;margin-top:2.5rem}
+</style>
+</head>
+<body>
+<div class="huelle">
+  <div class="kopf"><div class="sprache" role="group" aria-label="Sprache / Language">
+    <button type="button" data-lang="de" aria-pressed="true">DE</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
+  <main>
+    <h1 data-t="titel">Lehren und Lernen mit digitalen Werkzeugen</h1>
+    <p class="unter" data-t="unter">Zwei kleine Hilfen: eine für Studierende, eine für Lehrende.</p>
+    <div class="raster">
+      <a class="karte" href="prompts/">
+        <span class="fuer" data-t="f1">Für Studierende</span>
+        <h2 data-t="h1">Prompting-Tipps fürs Studium</h2>
+        <p data-t="p1">Prompt aus fünf Bausteinen bauen, Vorlagen für Hausarbeit und Prüfung ausfüllen und kopieren.</p>
+        <span class="los" data-t="los">Öffnen ›</span></a>
+      <a class="karte" href="werkzeuge/">
+        <span class="fuer" data-t="f2">Für Lehrende</span>
+        <h2 data-t="h2">Erst das Ziel, dann das Werkzeug</h2>
+        <p data-t="p2">Was sollen Ihre Studierenden tun? Sieben Ziele mit passenden Moodle- und KI-Werkzeugen, dazu ein Plakat zum Ausdrucken.</p>
+        <span class="los" data-t="los">Öffnen ›</span></a>
+    </div>
+  </main>
+  <footer data-t="fuss">Christian-Maximilian Steier, Hochschule Düsseldorf. Lizenz CC BY-NC-SA 4.0.</footer>
+</div>
+<script>
+const T={de:{titel:"Lehren und Lernen mit digitalen Werkzeugen",unter:"Zwei kleine Hilfen: eine für Studierende, eine für Lehrende.",f1:"Für Studierende",h1:"Prompting-Tipps fürs Studium",p1:"Prompt aus fünf Bausteinen bauen, Vorlagen für Hausarbeit und Prüfung ausfüllen und kopieren.",f2:"Für Lehrende",h2:"Erst das Ziel, dann das Werkzeug",p2:"Was sollen Ihre Studierenden tun? Sieben Ziele mit passenden Moodle- und KI-Werkzeugen, dazu ein Plakat zum Ausdrucken.",los:"Öffnen ›",fuss:"Christian-Maximilian Steier, Hochschule Düsseldorf. Lizenz CC BY-NC-SA 4.0."},
+en:{titel:"Teaching and learning with digital tools",unter:"Two small guides: one for students, one for teachers.",f1:"For students",h1:"Prompting tips for your studies",p1:"Build a prompt from five blocks, fill in templates for papers and exams, and copy them.",f2:"For teachers",h2:"Goal first, then the tool",p2:"What should your students do? Seven goals with suitable Moodle and AI tools, plus a poster to print.",los:"Open ›",fuss:"Christian-Maximilian Steier, Hochschule Düsseldorf (University of Applied Sciences). Licence CC BY-NC-SA 4.0."}};
+function setze(l){localStorage.setItem("pt-lang",l);document.documentElement.lang=l;document.title=T[l].titel;
+document.querySelectorAll("[data-t]").forEach(e=>e.textContent=T[l][e.dataset.t]);
+document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===l));}
+document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>setze(b.dataset.lang));
+setze(localStorage.getItem("pt-lang")||((navigator.language||"de").toLowerCase().startsWith("de")?"de":"en"));
+</script>
+</body>
+</html>
